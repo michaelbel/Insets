@@ -58,12 +58,12 @@ fun Sample06Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Safe Drawing Padding") },
+                title = { Text("Безопасные отступы рисования") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -93,15 +93,15 @@ fun Sample06Screen(onBack: () -> Unit) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            "What it does",
+                            "Что делает",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = "Applies padding equivalent to WindowInsets.safeDrawing — the union of all " +
-                                "system UI insets that should be avoided for drawing: status bar, navigation bar, " +
-                                "display cutout, and IME (keyboard).",
+                            text = "Применяет отступ, эквивалентный WindowInsets.safeDrawing — объединению всех " +
+                                "системных отступов, которых следует избегать при отрисовке: строка состояния, " +
+                                "панель навигации, вырез дисплея и IME (клавиатура).",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -122,11 +122,11 @@ fun Sample06Screen(onBack: () -> Unit) {
                 }
             }
             item {
-                InfoCard(title = "Current safeDrawing Insets") {
-                    InfoRow("top", "$topDp")
-                    InfoRow("bottom", "$bottomDp")
-                    InfoRow("left", "$leftDp")
-                    InfoRow("right", "$rightDp")
+                InfoCard(title = "Текущие отступы safeDrawing") {
+                    InfoRow("сверху", "$topDp")
+                    InfoRow("снизу", "$bottomDp")
+                    InfoRow("слева", "$leftDp")
+                    InfoRow("справа", "$rightDp")
                 }
             }
             item { SafeDrawingVisual() }
@@ -137,15 +137,15 @@ fun Sample06Screen(onBack: () -> Unit) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            "Included insets",
+                            "Включённые отступы",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
-                        BulletPoint("Status bar (top system bar)")
-                        BulletPoint("Navigation bar (gesture zone or button bar)")
-                        BulletPoint("Display cutout (notch / punch-hole / waterfall)")
-                        BulletPoint("IME / soft keyboard (when visible)")
+                        BulletPoint("Строка состояния (верхняя системная панель)")
+                        BulletPoint("Панель навигации (жестовая зона или кнопки)")
+                        BulletPoint("Вырез дисплея (чёлка / отверстие / водопад)")
+                        BulletPoint("IME / экранная клавиатура (когда видима)")
                     }
                 }
             }
@@ -165,7 +165,7 @@ private fun SafeDrawingVisual() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                "Without vs. with safeDrawingPadding",
+                "Без и с safeDrawingPadding",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
@@ -176,12 +176,12 @@ private fun SafeDrawingVisual() {
             ) {
                 PhoneMockup(
                     modifier = Modifier.weight(1f),
-                    label = "without",
+                    label = "без",
                     hasPadding = false
                 )
                 PhoneMockup(
                     modifier = Modifier.weight(1f),
-                    label = "with",
+                    label = "с",
                     hasPadding = true
                 )
             }
@@ -192,12 +192,12 @@ private fun SafeDrawingVisual() {
                 LegendChip(
                     modifier = Modifier.weight(1f),
                     color = MaterialTheme.colorScheme.errorContainer,
-                    label = "System UI zone"
+                    label = "Зона системного UI"
                 )
                 LegendChip(
                     modifier = Modifier.weight(1f),
                     color = MaterialTheme.colorScheme.primaryContainer,
-                    label = "Safe content"
+                    label = "Безопасное содержимое"
                 )
             }
         }
@@ -228,7 +228,7 @@ private fun PhoneMockup(modifier: Modifier = Modifier, label: String, hasPadding
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "safe",
+                        text = "безопасно",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
@@ -239,7 +239,7 @@ private fun PhoneMockup(modifier: Modifier = Modifier, label: String, hasPadding
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "unsafe",
+                        text = "небезопасно",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

@@ -60,12 +60,12 @@ fun Sample08Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Waterfall Insets") },
+                title = { Text("Отступы водопада") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -95,15 +95,15 @@ fun Sample08Screen(onBack: () -> Unit) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            "What is a waterfall display?",
+                            "Что такое дисплей-водопад?",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = "A waterfall (or edge) display curves over the side edges of the device. " +
-                                "The content visible in the curved portion may be distorted or unintentionally " +
-                                "tapped. WindowInsets.waterfall reports how far the curved area extends from each edge.",
+                            text = "Дисплей-водопад (или edge-дисплей) изгибается по боковым краям устройства. " +
+                                "Контент в изогнутой части может быть искажён или случайно нажат. " +
+                                "WindowInsets.waterfall сообщает, насколько изогнутая область выступает от каждого края.",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -112,12 +112,12 @@ fun Sample08Screen(onBack: () -> Unit) {
             }
             item {
                 InfoCard(
-                    title = if (hasWaterfall) "Waterfall Insets (this device)" else "Waterfall Insets — no waterfall detected"
+                    title = if (hasWaterfall) "Отступы водопада (это устройство)" else "Отступы водопада — водопад не обнаружен"
                 ) {
-                    InfoRow("top", "$topDp")
-                    InfoRow("bottom", "$bottomDp")
-                    InfoRow("left", "$leftDp")
-                    InfoRow("right", "$rightDp")
+                    InfoRow("сверху", "$topDp")
+                    InfoRow("снизу", "$bottomDp")
+                    InfoRow("слева", "$leftDp")
+                    InfoRow("справа", "$rightDp")
                 }
             }
             item { WaterfallDiagram(hasWaterfall = hasWaterfall) }
@@ -128,16 +128,16 @@ fun Sample08Screen(onBack: () -> Unit) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            "How to handle",
+                            "Как обрабатывать",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
-                        BulletPoint("Avoid placing interactive elements in the waterfall zones")
-                        BulletPoint("Use WindowInsets.waterfall.getLeft() / getRight() for precise avoidance")
-                        BulletPoint("Waterfall insets are included in WindowInsets.displayCutout")
-                        BulletPoint("Most prominent on devices like Samsung Galaxy S series with curved screens")
-                        BulletPoint("Left/right are typically non-zero; top/bottom are usually zero")
+                        BulletPoint("Не размещайте интерактивные элементы в зонах водопада")
+                        BulletPoint("Используйте WindowInsets.waterfall.getLeft() / getRight() для точного обхода")
+                        BulletPoint("Отступы водопада включены в WindowInsets.displayCutout")
+                        BulletPoint("Наиболее выражено на устройствах серии Samsung Galaxy S с изогнутыми экранами")
+                        BulletPoint("Слева/справа обычно ненулевые; сверху/снизу как правило нулевые")
                     }
                 }
             }
@@ -157,7 +157,7 @@ private fun WaterfallDiagram(hasWaterfall: Boolean) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                "Waterfall zone (side curves)",
+                "Зона водопада (боковые изгибы)",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
@@ -190,7 +190,7 @@ private fun WaterfallDiagram(hasWaterfall: Boolean) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "safe\ncontent",
+                            text = "безопасная\nзона",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                         )
@@ -204,8 +204,8 @@ private fun WaterfallDiagram(hasWaterfall: Boolean) {
                 }
             }
             Text(
-                text = if (hasWaterfall) "Red = curved waterfall zone (avoid placing tappable UI here)"
-                else "No waterfall display detected on this device",
+                text = if (hasWaterfall) "Красный = изогнутая зона водопада (не размещайте нажимаемый UI здесь)"
+                else "Дисплей-водопад на этом устройстве не обнаружен",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

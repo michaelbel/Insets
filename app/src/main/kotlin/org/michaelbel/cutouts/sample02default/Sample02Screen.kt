@@ -49,12 +49,12 @@ fun Sample02Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Default Mode") },
+                title = { Text("Режим по умолчанию") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -79,18 +79,18 @@ fun Sample02Screen(onBack: () -> Unit) {
             item { ConstantBadge("LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT") }
             item {
                 DescriptionCard(
-                    description = "The default behavior. The window may or may not extend into the display " +
-                        "cutout region, depending on system and window configuration. In portrait with system " +
-                        "bars visible, content is letterboxed to avoid the cutout."
+                    description = "Поведение по умолчанию. Окно может расширяться или не расширяться в зону " +
+                        "выреза дисплея в зависимости от конфигурации системы и окна. В портретном режиме при " +
+                        "видимых системных панелях контент отображается с отступом, чтобы не перекрывать вырез."
                 )
             }
             item {
                 WhenToUseCard(
                     items = listOf(
-                        "Portrait with status bar: content avoids the cutout",
-                        "Landscape with status bar: content avoids both sides",
-                        "Fullscreen (status bar hidden): content may extend into cutout",
-                        "Best starting point for most apps — no explicit handling needed",
+                        "Портрет со строкой состояния: контент не заходит в вырез",
+                        "Альбомный режим со строкой состояния: контент избегает обеих сторон",
+                        "Полноэкранный режим (строка скрыта): контент может зайти в вырез",
+                        "Лучшая отправная точка для большинства приложений — явная обработка не нужна",
                     )
                 )
             }

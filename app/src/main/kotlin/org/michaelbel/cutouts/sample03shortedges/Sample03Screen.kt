@@ -48,12 +48,12 @@ fun Sample03Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Short Edges Mode") },
+                title = { Text("Режим коротких краёв") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -78,19 +78,19 @@ fun Sample03Screen(onBack: () -> Unit) {
             item { ConstantBadge("LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES") }
             item {
                 DescriptionCard(
-                    description = "The window is allowed to extend into the display cutout region on the short " +
-                        "edges of the screen (top and bottom in portrait). Content may be drawn under the cutout " +
-                        "area. Use WindowInsets.displayCutout to keep important UI elements out of that zone."
+                    description = "Окно может расширяться в зону выреза по коротким краям экрана (вверх и вниз " +
+                        "в портретном режиме). Контент может отрисовываться под вырезом. " +
+                        "Используйте WindowInsets.displayCutout, чтобы важные элементы интерфейса не попадали в эту зону."
                 )
             }
             item {
                 WhenToUseCard(
                     items = listOf(
-                        "Portrait: content can extend behind top/bottom cutouts",
-                        "Landscape: content extends into the short-edge (typically top) cutout",
-                        "Applies regardless of system bar visibility",
-                        "Always pair with WindowInsets.displayCutout padding on interactive elements",
-                        "Ideal for immersive fullscreen experiences with a notch or punch-hole",
+                        "Портрет: контент может заходить за вырезы сверху и снизу",
+                        "Альбомный режим: контент заходит в вырез короткого края (обычно сверху)",
+                        "Применяется независимо от видимости системных панелей",
+                        "Всегда используйте отступ WindowInsets.displayCutout для интерактивных элементов",
+                        "Идеально для иммерсивного полноэкранного режима с чёлкой или отверстием в экране",
                     )
                 )
             }

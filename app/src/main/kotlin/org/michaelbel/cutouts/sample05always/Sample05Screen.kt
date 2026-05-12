@@ -48,12 +48,12 @@ fun Sample05Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Always Mode") },
+                title = { Text("Режим «Всегда»") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -78,19 +78,19 @@ fun Sample05Screen(onBack: () -> Unit) {
             item { ConstantBadge("LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS") }
             item {
                 DescriptionCard(
-                    description = "Added in API 30. The window always extends into the display cutout region, even " +
-                        "when the window is in windowed mode (not fullscreen). Content may be rendered under the " +
-                        "cutout area. You must use WindowInsets to offset interactive elements away from it."
+                    description = "Добавлено в API 30. Окно всегда расширяется в зону выреза дисплея, даже " +
+                        "в оконном режиме (не полноэкранном). Контент может отрисовываться под вырезом. " +
+                        "Необходимо использовать WindowInsets для отступа интерактивных элементов от выреза."
                 )
             }
             item {
                 WhenToUseCard(
                     items = listOf(
-                        "Available from API 30 (Android 11) and above — minSdk 34 makes this always available",
-                        "Content extends into cutout area even in split-screen / windowed mode",
-                        "Most aggressive mode — content always occupies the full screen including cutout zone",
-                        "Always use WindowInsets.displayCutout to protect tappable UI elements",
-                        "Useful for drawing backgrounds, gradients, and decorative elements edge-to-edge",
+                        "Доступно с API 30 (Android 11) и выше — minSdk 34 гарантирует поддержку",
+                        "Контент заходит в зону выреза даже в режиме разделённого экрана / оконном режиме",
+                        "Самый агрессивный режим — контент всегда занимает весь экран включая зону выреза",
+                        "Всегда используйте WindowInsets.displayCutout для защиты нажимаемых элементов",
+                        "Полезно для отрисовки фонов, градиентов и декоративных элементов от края до края",
                     )
                 )
             }

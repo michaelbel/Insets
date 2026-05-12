@@ -48,12 +48,12 @@ fun Sample04Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Never Mode") },
+                title = { Text("Режим «Никогда»") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -78,19 +78,19 @@ fun Sample04Screen(onBack: () -> Unit) {
             item { ConstantBadge("LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER") }
             item {
                 DescriptionCard(
-                    description = "The window never extends into a display cutout area. The window is always " +
-                        "letterboxed or pillarboxed so that it avoids the display cutout region entirely. " +
-                        "Content is never drawn behind the cutout."
+                    description = "Окно никогда не расширяется в зону выреза дисплея. Окно всегда отображается " +
+                        "с отступами (letterbox или pillarbox), полностью избегая зоны выреза. " +
+                        "Контент никогда не отрисовывается за вырезом."
                 )
             }
             item {
                 WhenToUseCard(
                     items = listOf(
-                        "UI that cannot safely adapt to the presence of a cutout",
-                        "Fullscreen video playback — letterboxing is preferable to content overlap",
-                        "Games where any pixel under the cutout would be unacceptable",
-                        "Legacy apps not designed for edge-to-edge layouts",
-                        "Content that must never be clipped or obscured by hardware",
+                        "Интерфейс, который не может безопасно адаптироваться к вырезу",
+                        "Полноэкранное воспроизведение видео — letterbox предпочтительнее перекрытия контента",
+                        "Игры, где недопустим любой пиксель под вырезом",
+                        "Унаследованные приложения, не рассчитанные на edge-to-edge разметку",
+                        "Контент, который нельзя обрезать или перекрывать аппаратными элементами",
                     )
                 )
             }

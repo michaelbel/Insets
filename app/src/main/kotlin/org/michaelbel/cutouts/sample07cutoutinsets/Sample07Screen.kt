@@ -60,12 +60,12 @@ fun Sample07Screen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Display Cutout Insets") },
+                title = { Text("Отступы выреза дисплея") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Назад"
                         )
                     }
                 },
@@ -95,15 +95,15 @@ fun Sample07Screen(onBack: () -> Unit) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            "What it is",
+                            "Что это",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = "WindowInsets.displayCutout provides only the insets for the display cutout " +
-                                "(notch, punch-hole, or corner cutout). Unlike safeDrawing, it does not include " +
-                                "status bar or navigation bar insets. Use it for precise, cutout-only avoidance.",
+                            text = "WindowInsets.displayCutout предоставляет только отступы для выреза дисплея " +
+                                "(чёлка, отверстие или угловой вырез). В отличие от safeDrawing, не включает " +
+                                "отступы строки состояния и панели навигации. Используйте для точного обхода только выреза.",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -119,12 +119,12 @@ fun Sample07Screen(onBack: () -> Unit) {
             }
             item {
                 InfoCard(
-                    title = if (hasCutout) "Cutout Insets (this device)" else "Cutout Insets — no cutout detected"
+                    title = if (hasCutout) "Отступы выреза (это устройство)" else "Отступы выреза — вырез не обнаружен"
                 ) {
-                    InfoRow("top", "$topDp")
-                    InfoRow("bottom", "$bottomDp")
-                    InfoRow("left", "$leftDp")
-                    InfoRow("right", "$rightDp")
+                    InfoRow("сверху", "$topDp")
+                    InfoRow("снизу", "$bottomDp")
+                    InfoRow("слева", "$leftDp")
+                    InfoRow("справа", "$rightDp")
                 }
             }
             item { CutoutInsetsVisual(hasCutout = hasCutout) }
@@ -135,15 +135,15 @@ fun Sample07Screen(onBack: () -> Unit) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            "Usage patterns",
+                            "Варианты использования",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
-                        BulletPoint("Padding: Modifier.windowInsetsPadding(WindowInsets.displayCutout)")
-                        BulletPoint("Custom offset: WindowInsets.displayCutout.getTop(LocalDensity.current)")
-                        BulletPoint("Consume: Modifier.consumeWindowInsets(WindowInsets.displayCutout)")
-                        BulletPoint("Combine: WindowInsets.displayCutout.union(WindowInsets.systemBars)")
+                        BulletPoint("Отступ: Modifier.windowInsetsPadding(WindowInsets.displayCutout)")
+                        BulletPoint("Смещение: WindowInsets.displayCutout.getTop(LocalDensity.current)")
+                        BulletPoint("Потребление: Modifier.consumeWindowInsets(WindowInsets.displayCutout)")
+                        BulletPoint("Объединение: WindowInsets.displayCutout.union(WindowInsets.systemBars)")
                     }
                 }
             }
@@ -163,7 +163,7 @@ private fun CutoutInsetsVisual(hasCutout: Boolean) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                "Without vs. with displayCutout padding",
+                "Без и с отступами displayCutout",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
@@ -198,14 +198,14 @@ private fun CutoutInsetsVisual(hasCutout: Boolean) {
                             )
                         }
                         Text(
-                            text = if (hasCutout) "overlaps!" else "no cutout",
+                            text = if (hasCutout) "перекрытие!" else "нет выреза",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
                     Spacer(Modifier.height(4.dp))
-                    Text("without", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("без", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                     Box(
@@ -238,14 +238,14 @@ private fun CutoutInsetsVisual(hasCutout: Boolean) {
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "safe",
+                                text = "безопасно",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                             )
                         }
                     }
                     Spacer(Modifier.height(4.dp))
-                    Text("with", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("с", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
