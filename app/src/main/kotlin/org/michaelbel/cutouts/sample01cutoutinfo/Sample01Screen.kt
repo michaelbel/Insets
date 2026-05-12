@@ -35,28 +35,35 @@ import androidx.core.view.ViewCompat
 import org.michaelbel.cutouts.SectionLabel
 
 @Composable
-fun Sample01Screen(onBack: () -> Unit) {
-    BackHandler(onBack = onBack)
+fun Sample01Screen(
+    onBack: () -> Unit
+) {
+    BackHandler(
+        onBack = onBack
+    )
 
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val cutoutTop = WindowInsets.displayCutout.getTop(density)
-    val cutoutBottom = WindowInsets.displayCutout.getBottom(density)
-    val cutoutLeft = WindowInsets.displayCutout.getLeft(density, layoutDirection)
-    val cutoutRight = WindowInsets.displayCutout.getRight(density, layoutDirection)
+    val displayCutout = WindowInsets.displayCutout
+
+    val cutoutTop = displayCutout.getTop(density)
+    val cutoutBottom = displayCutout.getBottom(density)
+    val cutoutLeft = displayCutout.getLeft(density, layoutDirection)
+    val cutoutRight = displayCutout.getRight(density, layoutDirection)
 
     val hasDisplayCutout = cutoutTop > 0 || cutoutBottom > 0 || cutoutLeft > 0 || cutoutRight > 0
 
 
+
     val view = LocalView.current
     val windowInsets = remember(view) { ViewCompat.getRootWindowInsets(view) }
-    val displayCutout = windowInsets?.displayCutout
-    val safeInsets = displayCutout?.let {
+    val displayCutout2 = windowInsets?.displayCutout
+    val safeInsets = displayCutout2?.let {
         Rect(it.safeInsetLeft, it.safeInsetTop, it.safeInsetRight, it.safeInsetBottom)
     }
-    val boundingRects = displayCutout?.boundingRects ?: emptyList()
-    val waterfallInsets = displayCutout?.waterfallInsets
+    val boundingRects = displayCutout2?.boundingRects ?: emptyList()
+    val waterfallInsets = displayCutout2?.waterfallInsets
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -64,12 +71,12 @@ fun Sample01Screen(onBack: () -> Unit) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Информация о вырезе дисплея") },
+                title = { Text("Информация о вырезе") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Назад"
+                            contentDescription = null
                         )
                     }
                 },
@@ -98,18 +105,15 @@ fun Sample01Screen(onBack: () -> Unit) {
                     )
                 )
             }
-
-
-
             item {
-                val position = displayCutout?.let {
-                    buildList {
-                        if (it.safeInsetTop > 0) add("СВЕРХУ")
-                        if (it.safeInsetBottom > 0) add("СНИЗУ")
-                        if (it.safeInsetLeft > 0) add("СЛЕВА")
-                        if (it.safeInsetRight > 0) add("СПРАВА")
-                    }.joinToString(", ")
-                } ?: "—"
+                val position = when {
+                    cutoutTop > 0 -> "СВЕРХУ"
+                    cutoutBottom > 0 -> "СНИЗУ"
+                    cutoutLeft > 0 -> "СЛЕВА"
+                    cutoutRight > 0 -> "СПРАВА"
+                    else -> "—"
+                }
+
                 ListItem(
                     headlineContent = { Text("Расположение выреза") },
                     trailingContent = { Text(position) },
@@ -118,6 +122,12 @@ fun Sample01Screen(onBack: () -> Unit) {
                     )
                 )
             }
+
+
+
+
+
+
             item {
                 ListItem(
                     headlineContent = { Text("Ограничивающие прямоугольники") },
