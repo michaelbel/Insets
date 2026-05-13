@@ -60,13 +60,10 @@ fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
                 scrollBehavior = scrollBehavior,
             )
         }
-    ) { paddingValues ->
+    ) { innerPadding ->
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                top = paddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding()
-            )
+            contentPadding = innerPadding
         ) {
             itemsIndexed(samples) { index, sample ->
                 ListItem(
