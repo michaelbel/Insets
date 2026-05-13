@@ -1,13 +1,16 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+@file:OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3ExpressiveApi::class
+)
 
 package org.michaelbel.cutouts.sample01cutoutinfo
 
-import android.graphics.Rect
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.waterfall
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -29,8 +32,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.view.ViewCompat
 import org.michaelbel.cutouts.SectionLabel
 
@@ -54,15 +55,20 @@ fun Sample01Screen(
 
     val hasDisplayCutout = cutoutTop > 0 || cutoutBottom > 0 || cutoutLeft > 0 || cutoutRight > 0
 
+    val waterfall = WindowInsets.waterfall
+
+    val waterfallTop = waterfall.getTop(density)
+    val waterfallBottom = waterfall.getBottom(density)
+    val waterfallLeft = waterfall.getLeft(density, layoutDirection)
+    val waterfallRight = waterfall.getRight(density, layoutDirection)
+
+    val hasWaterfall = waterfallTop > 0 || waterfallBottom > 0 || waterfallLeft > 0 || waterfallRight > 0
+
 
 
     val view = LocalView.current
     val windowInsets = remember(view) { ViewCompat.getRootWindowInsets(view) }
     val displayCutout2 = windowInsets?.displayCutout
-    val safeInsets = displayCutout2?.let {
-        Rect(it.safeInsetLeft, it.safeInsetTop, it.safeInsetRight, it.safeInsetBottom)
-    }
-    val boundingRects = displayCutout2?.boundingRects ?: emptyList()
     val waterfallInsets = displayCutout2?.waterfallInsets
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -122,92 +128,63 @@ fun Sample01Screen(
                     )
                 )
             }
-
-
-
-
-
-
+            item { SectionLabel("Безопасные отступы выреза") }
             item {
-                ListItem(
-                    headlineContent = { Text("Ограничивающие прямоугольники") },
-                    trailingContent = { Text("${boundingRects.size}") },
-                    colors = ListItemDefaults.colors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                )
-            }
+                val cutoutTopDp = with(density) { cutoutTop.toDp() }
 
-            item { SectionLabel("Безопасные отступы") }
-            item {
-                val topDp = with(density) { (safeInsets?.top ?: 0).toDp() }
                 ListItem(
                     headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("${safeInsets?.top ?: 0} px  ($topDp)") },
+                    trailingContent = { Text("$cutoutTop.px  ($cutoutTopDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { (safeInsets?.bottom ?: 0).toDp() }
+                val cutoutBottomDp = with(density) { cutoutBottom.toDp() }
+
                 ListItem(
                     headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("${safeInsets?.bottom ?: 0} px  ($bottomDp)") },
+                    trailingContent = { Text("$cutoutBottom.px  ($cutoutBottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { (safeInsets?.left ?: 0).toDp() }
+                val cutoutLeftDp = with(density) { cutoutLeft.toDp() }
+
                 ListItem(
                     headlineContent = { Text("Слева") },
-                    trailingContent = { Text("${safeInsets?.left ?: 0} px  ($leftDp)") },
+                    trailingContent = { Text("$cutoutLeft.px  ($cutoutLeftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { (safeInsets?.right ?: 0).toDp() }
+                val cutoutRightDp = with(density) { cutoutRight.toDp() }
+
                 ListItem(
                     headlineContent = { Text("Справа") },
-                    trailingContent = { Text("${safeInsets?.right ?: 0} px  ($rightDp)") },
+                    trailingContent = { Text("$cutoutRight.px  ($cutoutRightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
 
-            item { SectionLabel("Ограничивающие прямоугольники  (${boundingRects.size})") }
-            if (boundingRects.isEmpty()) {
-                item {
-                    ListItem(
-                        headlineContent = { Text("Нет") },
-                        trailingContent = { Text("—") },
-                        colors = ListItemDefaults.colors(
-                            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                        )
-                    )
-                }
-            } else {
-                boundingRects.forEachIndexed { i, rect ->
-                    item {
-                        ListItem(
-                            headlineContent = { Text("rect[$i]") },
-                            trailingContent = { Text(rect.toInfoString(density)) },
-                            colors = ListItemDefaults.colors(
-                                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                            )
-                        )
-                    }
-                }
-            }
+
+
+
+
+
+
 
             item { SectionLabel("Отступы водопада") }
             item {
                 val leftDp = with(density) { (waterfallInsets?.left ?: 0).toDp() }
+
                 ListItem(
                     headlineContent = { Text("Слева") },
                     trailingContent = { Text("${waterfallInsets?.left ?: 0} px  ($leftDp)") },
@@ -218,6 +195,7 @@ fun Sample01Screen(
             }
             item {
                 val topDp = with(density) { (waterfallInsets?.top ?: 0).toDp() }
+
                 ListItem(
                     headlineContent = { Text("Сверху") },
                     trailingContent = { Text("${waterfallInsets?.top ?: 0} px  ($topDp)") },
@@ -228,6 +206,7 @@ fun Sample01Screen(
             }
             item {
                 val rightDp = with(density) { (waterfallInsets?.right ?: 0).toDp() }
+
                 ListItem(
                     headlineContent = { Text("Справа") },
                     trailingContent = { Text("${waterfallInsets?.right ?: 0} px  ($rightDp)") },
@@ -238,6 +217,7 @@ fun Sample01Screen(
             }
             item {
                 val bottomDp = with(density) { (waterfallInsets?.bottom ?: 0).toDp() }
+
                 ListItem(
                     headlineContent = { Text("Снизу") },
                     trailingContent = { Text("${waterfallInsets?.bottom ?: 0} px  ($bottomDp)") },
@@ -248,12 +228,4 @@ fun Sample01Screen(
             }
         }
     }
-}
-
-private fun Rect.toInfoString(density: Density): String {
-    val leftDp = with(density) { left.toDp().value.toInt() }
-    val topDp = with(density) { top.toDp().value.toInt() }
-    val rightDp = with(density) { right.toDp().value.toInt() }
-    val bottomDp = with(density) { bottom.toDp().value.toInt() }
-    return "${leftDp}x${topDp} → ${rightDp}x${bottomDp} dp"
 }
