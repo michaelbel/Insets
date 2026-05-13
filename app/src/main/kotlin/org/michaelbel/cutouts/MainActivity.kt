@@ -17,7 +17,6 @@ import org.michaelbel.cutouts.sample05never.Sample05Screen
 import org.michaelbel.cutouts.sample06always.Sample06Screen
 import org.michaelbel.cutouts.sample07safedrawing.Sample07Screen
 import org.michaelbel.cutouts.sample08cutoutinsets.Sample08Screen
-import org.michaelbel.cutouts.sample09waterfall.Sample09Screen
 
 class MainActivity : ComponentActivity() {
 
@@ -38,7 +37,6 @@ class MainActivity : ComponentActivity() {
                     6 -> Sample06Screen(onBack = { selectedSample = 0 })
                     7 -> Sample07Screen(onBack = { selectedSample = 0 })
                     8 -> Sample08Screen(onBack = { selectedSample = 0 })
-                    9 -> Sample09Screen(onBack = { selectedSample = 0 })
                 }
             }
         }

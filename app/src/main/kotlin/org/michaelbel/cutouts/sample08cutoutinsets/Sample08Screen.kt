@@ -47,15 +47,9 @@ import org.michaelbel.cutouts.InfoRow
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Sample08Screen(onBack: () -> Unit) {
-    BackHandler(onBack = onBack)
-
-    val density = LocalDensity.current
-    val cutoutInsets = WindowInsets.displayCutout
-    val topDp = with(density) { cutoutInsets.getTop(density).toDp() }
-    val bottomDp = with(density) { cutoutInsets.getBottom(density).toDp() }
-    val leftDp = with(density) { cutoutInsets.getLeft(density, LayoutDirection.Ltr).toDp() }
-    val rightDp = with(density) { cutoutInsets.getRight(density, LayoutDirection.Ltr).toDp() }
-    val hasCutout = topDp > 0.dp || bottomDp > 0.dp || leftDp > 0.dp || rightDp > 0.dp
+    BackHandler(
+        onBack = onBack
+    )
 
     Scaffold(
         topBar = {
@@ -118,17 +112,6 @@ fun Sample08Screen(onBack: () -> Unit) {
                 }
             }
             item {
-                InfoCard(
-                    title = if (hasCutout) "Отступы выреза (это устройство)" else "Отступы выреза — вырез не обнаружен"
-                ) {
-                    InfoRow("сверху", "$topDp")
-                    InfoRow("снизу", "$bottomDp")
-                    InfoRow("слева", "$leftDp")
-                    InfoRow("справа", "$rightDp")
-                }
-            }
-            item { CutoutInsetsVisual(hasCutout = hasCutout) }
-            item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
@@ -145,107 +128,6 @@ fun Sample08Screen(onBack: () -> Unit) {
                         BulletPoint("Потребление: Modifier.consumeWindowInsets(WindowInsets.displayCutout)")
                         BulletPoint("Объединение: WindowInsets.displayCutout.union(WindowInsets.systemBars)")
                     }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CutoutInsetsVisual(hasCutout: Boolean) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                "Без и с отступами displayCutout",
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Bold,
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .border(1.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f), RoundedCornerShape(10.dp))
-                            .background(MaterialTheme.colorScheme.surface),
-                        contentAlignment = Alignment.TopCenter
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(20.dp)
-                                .background(MaterialTheme.colorScheme.error.copy(alpha = 0.3f)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .height(10.dp)
-                                    .fillMaxWidth(0.12f)
-                                    .clip(RoundedCornerShape(50))
-                                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.6f))
-                            )
-                        }
-                        Text(
-                            text = if (hasCutout) "перекрытие!" else "нет выреза",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                    Spacer(Modifier.height(4.dp))
-                    Text("без", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .border(1.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f), RoundedCornerShape(10.dp))
-                            .background(MaterialTheme.colorScheme.surface)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(20.dp)
-                                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .height(10.dp)
-                                    .fillMaxWidth(0.12f)
-                                    .clip(RoundedCornerShape(50))
-                                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.6f))
-                            )
-                        }
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .windowInsetsPadding(WindowInsets.displayCutout),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "безопасно",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                            )
-                        }
-                    }
-                    Spacer(Modifier.height(4.dp))
-                    Text("с", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
