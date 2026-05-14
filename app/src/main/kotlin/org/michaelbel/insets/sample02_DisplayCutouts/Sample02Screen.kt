@@ -3,7 +3,7 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample02_Cutouts
+package org.michaelbel.insets.sample02_DisplayCutouts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets

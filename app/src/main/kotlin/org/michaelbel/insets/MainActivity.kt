@@ -41,7 +41,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.michaelbel.insets.sample01_CaptionBar.Sample01Screen
-import org.michaelbel.insets.sample02_Cutouts.Sample02Screen
+import org.michaelbel.insets.sample02_DisplayCutouts.Sample02Screen
 import org.michaelbel.insets.sample03_Waterfall.Sample03Screen
 import org.michaelbel.insets.sample04_Default.Sample04Screen
 import org.michaelbel.insets.sample05_ShortEdges.Sample05Screen
@@ -89,7 +89,7 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Cutouts") },
+                title = { Text(text = "Insets") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
                 ),
@@ -112,34 +112,31 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
                 SegmentedListItem(
                     onClick = { onSampleClick(1) },
                     overlineContent = { Text("Sample 01") },
-                    supportingContent = { Text("WindowInsets.captionBar") },
                     shapes = ListItemDefaults.segmentedShapes(index = 0, count = 3),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text("Строка заголовка") }
+                ) { Text("WindowInsets.captionBar") }
             }
             item {
                 SegmentedListItem(
                     onClick = { onSampleClick(2) },
                     overlineContent = { Text("Sample 02") },
-                    supportingContent = { Text("WindowInsets.displayCutout") },
                     shapes = ListItemDefaults.segmentedShapes(index = 1, count = 3),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text("Информация о вырезе дисплея") }
+                ) { Text("WindowInsets.displayCutout") }
             }
             item {
                 SegmentedListItem(
                     onClick = { onSampleClick(3) },
                     overlineContent = { Text("Sample 03") },
-                    supportingContent = { Text("WindowInsets.waterfall") },
                     shapes = ListItemDefaults.segmentedShapes(index = 2, count = 3),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
-                ) { Text("Отступы водопада") }
+                ) { Text("WindowInsets.waterfall") }
             }
 
             item { Spacer(modifier = Modifier.height(12.dp)) }
