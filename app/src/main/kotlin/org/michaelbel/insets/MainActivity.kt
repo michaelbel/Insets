@@ -40,7 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import org.michaelbel.insets.sample01_CutoutInfo.Sample01Screen
+import org.michaelbel.insets.sample01_Cutouts.Sample01Screen
 import org.michaelbel.insets.sample02_Waterfall.Sample02Screen
 import org.michaelbel.insets.sample03_Default.Sample03Screen
 import org.michaelbel.insets.sample04_ShortEdges.Sample04Screen
