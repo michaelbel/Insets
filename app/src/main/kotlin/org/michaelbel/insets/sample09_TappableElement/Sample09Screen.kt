@@ -3,11 +3,11 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample09_SystemGestures
+package org.michaelbel.insets.sample09_TappableElement
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.systemGestures
+import androidx.compose.foundation.layout.tappableElement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,14 +31,14 @@ fun Sample09Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val systemGestures = WindowInsets.systemGestures
+    val tappableElement = WindowInsets.tappableElement
 
-    val systemGesturesTop = systemGestures.getTop(density)
-    val systemGesturesBottom = systemGestures.getBottom(density)
-    val systemGesturesLeft = systemGestures.getLeft(density, layoutDirection)
-    val systemGesturesRight = systemGestures.getRight(density, layoutDirection)
+    val tappableElementTop = tappableElement.getTop(density)
+    val tappableElementBottom = tappableElement.getBottom(density)
+    val tappableElementLeft = tappableElement.getLeft(density, layoutDirection)
+    val tappableElementRight = tappableElement.getRight(density, layoutDirection)
 
-    val hasSystemGestures = systemGesturesTop > 0 || systemGesturesBottom > 0 || systemGesturesLeft > 0 || systemGesturesRight > 0
+    val hasTappableElement = tappableElementTop > 0 || tappableElementBottom > 0 || tappableElementLeft > 0 || tappableElementRight > 0
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -46,7 +46,7 @@ fun Sample09Screen() {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Системные жесты") },
+                title = { Text("Тапабельные элементы") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -64,8 +64,8 @@ fun Sample09Screen() {
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Жесты присутствуют") },
-                    trailingContent = { Text(if (hasSystemGestures) "ДА" else "НЕТ") },
+                    headlineContent = { Text("Элементы присутствуют") },
+                    trailingContent = { Text(if (hasTappableElement) "ДА" else "НЕТ") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,40 +73,40 @@ fun Sample09Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { systemGesturesTop.toDp() }
+                val topDp = with(density) { tappableElementTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$systemGesturesTop px  ($topDp)") },
+                    trailingContent = { Text("$tappableElementTop px  ($topDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { systemGesturesBottom.toDp() }
+                val bottomDp = with(density) { tappableElementBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$systemGesturesBottom px  ($bottomDp)") },
+                    trailingContent = { Text("$tappableElementBottom px  ($bottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { systemGesturesLeft.toDp() }
+                val leftDp = with(density) { tappableElementLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$systemGesturesLeft px  ($leftDp)") },
+                    trailingContent = { Text("$tappableElementLeft px  ($leftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { systemGesturesRight.toDp() }
+                val rightDp = with(density) { tappableElementRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$systemGesturesRight px  ($rightDp)") },
+                    trailingContent = { Text("$tappableElementRight px  ($rightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

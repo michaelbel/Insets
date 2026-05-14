@@ -42,17 +42,17 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.michaelbel.insets.sample01_CaptionBar.Sample01Screen
 import org.michaelbel.insets.sample02_DisplayCutouts.Sample02Screen
-import org.michaelbel.insets.sample04_Ime.Sample04Screen
-import org.michaelbel.insets.sample05_MandatorySystemGestures.Sample05Screen
-import org.michaelbel.insets.sample06_NavigationBars.Sample06Screen
-import org.michaelbel.insets.sample07_StatusBars.Sample07Screen
-import org.michaelbel.insets.sample08_SystemBars.Sample08Screen
-import org.michaelbel.insets.sample09_SystemGestures.Sample09Screen
-import org.michaelbel.insets.sample10_TappableElement.Sample10Screen
-import org.michaelbel.insets.sample11_Waterfall.Sample11Screen
-import org.michaelbel.insets.sample12_SafeDrawing.Sample12Screen
-import org.michaelbel.insets.sample13_SafeGestures.Sample13Screen
-import org.michaelbel.insets.sample14_SafeContent.Sample14Screen
+import org.michaelbel.insets.sample03_Ime.Sample03Screen
+import org.michaelbel.insets.sample04_MandatorySystemGestures.Sample04Screen
+import org.michaelbel.insets.sample05_NavigationBars.Sample05Screen
+import org.michaelbel.insets.sample06_StatusBars.Sample06Screen
+import org.michaelbel.insets.sample07_SystemBars.Sample07Screen
+import org.michaelbel.insets.sample08_SystemGestures.Sample08Screen
+import org.michaelbel.insets.sample09_TappableElement.Sample09Screen
+import org.michaelbel.insets.sample10_Waterfall.Sample10Screen
+import org.michaelbel.insets.sample11_SafeDrawing.Sample11Screen
+import org.michaelbel.insets.sample12_SafeGestures.Sample12Screen
+import org.michaelbel.insets.sample13_SafeContent.Sample13Screen
 
 class MainActivity: ComponentActivity() {
 
@@ -70,6 +70,7 @@ class MainActivity: ComponentActivity() {
                         when (selectedSample) {
                             1 -> Sample01Screen()
                             2 -> Sample02Screen()
+                            3 -> Sample03Screen()
                             4 -> Sample04Screen()
                             5 -> Sample05Screen()
                             6 -> Sample06Screen()
@@ -80,7 +81,6 @@ class MainActivity: ComponentActivity() {
                             11 -> Sample11Screen()
                             12 -> Sample12Screen()
                             13 -> Sample13Screen()
-                            14 -> Sample14Screen()
                         }
                     }
                 }
@@ -141,8 +141,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
 
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(4) },
-                    overlineContent = { Text("Sample 04") },
+                    onClick = { onSampleClick(3) },
+                    overlineContent = { Text("Sample 03") },
                     shapes = ListItemDefaults.segmentedShapes(index = 0, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -151,8 +151,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(5) },
-                    overlineContent = { Text("Sample 05") },
+                    onClick = { onSampleClick(4) },
+                    overlineContent = { Text("Sample 04") },
                     shapes = ListItemDefaults.segmentedShapes(index = 1, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -161,8 +161,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(6) },
-                    overlineContent = { Text("Sample 06") },
+                    onClick = { onSampleClick(5) },
+                    overlineContent = { Text("Sample 05") },
                     shapes = ListItemDefaults.segmentedShapes(index = 2, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -171,8 +171,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(7) },
-                    overlineContent = { Text("Sample 07") },
+                    onClick = { onSampleClick(6) },
+                    overlineContent = { Text("Sample 06") },
                     shapes = ListItemDefaults.segmentedShapes(index = 3, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -181,8 +181,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(8) },
-                    overlineContent = { Text("Sample 08") },
+                    onClick = { onSampleClick(7) },
+                    overlineContent = { Text("Sample 07") },
                     shapes = ListItemDefaults.segmentedShapes(index = 4, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -191,8 +191,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(9) },
-                    overlineContent = { Text("Sample 09") },
+                    onClick = { onSampleClick(8) },
+                    overlineContent = { Text("Sample 08") },
                     shapes = ListItemDefaults.segmentedShapes(index = 5, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -201,8 +201,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(10) },
-                    overlineContent = { Text("Sample 10") },
+                    onClick = { onSampleClick(9) },
+                    overlineContent = { Text("Sample 09") },
                     shapes = ListItemDefaults.segmentedShapes(index = 6, count = 7),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -214,8 +214,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
 
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(11) },
-                    overlineContent = { Text("Sample 11") },
+                    onClick = { onSampleClick(10) },
+                    overlineContent = { Text("Sample 10") },
                     shapes = ListItemDefaults.segmentedShapes(index = 0, count = 4),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -224,8 +224,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(12) },
-                    overlineContent = { Text("Sample 12") },
+                    onClick = { onSampleClick(11) },
+                    overlineContent = { Text("Sample 11") },
                     shapes = ListItemDefaults.segmentedShapes(index = 1, count = 4),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -234,8 +234,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(13) },
-                    overlineContent = { Text("Sample 13") },
+                    onClick = { onSampleClick(12) },
+                    overlineContent = { Text("Sample 12") },
                     shapes = ListItemDefaults.segmentedShapes(index = 2, count = 4),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -244,8 +244,8 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
             }
             item {
                 SegmentedListItem(
-                    onClick = { onSampleClick(14) },
-                    overlineContent = { Text("Sample 14") },
+                    onClick = { onSampleClick(13) },
+                    overlineContent = { Text("Sample 13") },
                     shapes = ListItemDefaults.segmentedShapes(index = 3, count = 4),
                     colors = ListItemDefaults.segmentedColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest

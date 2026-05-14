@@ -3,11 +3,11 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample14_SafeContent
+package org.michaelbel.insets.sample12_SafeGestures
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.safeGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,18 +27,18 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
 
 @Composable
-fun Sample14Screen() {
+fun Sample12Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val safeContent = WindowInsets.safeContent
+    val safeGestures = WindowInsets.safeGestures
 
-    val safeContentTop = safeContent.getTop(density)
-    val safeContentBottom = safeContent.getBottom(density)
-    val safeContentLeft = safeContent.getLeft(density, layoutDirection)
-    val safeContentRight = safeContent.getRight(density, layoutDirection)
+    val safeGesturesTop = safeGestures.getTop(density)
+    val safeGesturesBottom = safeGestures.getBottom(density)
+    val safeGesturesLeft = safeGestures.getLeft(density, layoutDirection)
+    val safeGesturesRight = safeGestures.getRight(density, layoutDirection)
 
-    val hasSafeContent = safeContentTop > 0 || safeContentBottom > 0 || safeContentLeft > 0 || safeContentRight > 0
+    val hasSafeGestures = safeGesturesTop > 0 || safeGesturesBottom > 0 || safeGesturesLeft > 0 || safeGesturesRight > 0
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -46,7 +46,7 @@ fun Sample14Screen() {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Безопасная зона контента") },
+                title = { Text("Безопасная зона жестов") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -65,7 +65,7 @@ fun Sample14Screen() {
             item {
                 ListItem(
                     headlineContent = { Text("Зона присутствует") },
-                    trailingContent = { Text(if (hasSafeContent) "ДА" else "НЕТ") },
+                    trailingContent = { Text(if (hasSafeGestures) "ДА" else "НЕТ") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,40 +73,40 @@ fun Sample14Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { safeContentTop.toDp() }
+                val topDp = with(density) { safeGesturesTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$safeContentTop px  ($topDp)") },
+                    trailingContent = { Text("$safeGesturesTop px  ($topDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { safeContentBottom.toDp() }
+                val bottomDp = with(density) { safeGesturesBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$safeContentBottom px  ($bottomDp)") },
+                    trailingContent = { Text("$safeGesturesBottom px  ($bottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { safeContentLeft.toDp() }
+                val leftDp = with(density) { safeGesturesLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$safeContentLeft px  ($leftDp)") },
+                    trailingContent = { Text("$safeGesturesLeft px  ($leftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { safeContentRight.toDp() }
+                val rightDp = with(density) { safeGesturesRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$safeContentRight px  ($rightDp)") },
+                    trailingContent = { Text("$safeGesturesRight px  ($rightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

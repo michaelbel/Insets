@@ -3,11 +3,11 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample11_Waterfall
+package org.michaelbel.insets.sample13_SafeContent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.waterfall
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,18 +27,18 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
 
 @Composable
-fun Sample11Screen() {
+fun Sample13Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val waterfall = WindowInsets.waterfall
+    val safeContent = WindowInsets.safeContent
 
-    val waterfallTop = waterfall.getTop(density)
-    val waterfallBottom = waterfall.getBottom(density)
-    val waterfallLeft = waterfall.getLeft(density, layoutDirection)
-    val waterfallRight = waterfall.getRight(density, layoutDirection)
+    val safeContentTop = safeContent.getTop(density)
+    val safeContentBottom = safeContent.getBottom(density)
+    val safeContentLeft = safeContent.getLeft(density, layoutDirection)
+    val safeContentRight = safeContent.getRight(density, layoutDirection)
 
-    val hasWaterfall = waterfallTop > 0 || waterfallBottom > 0 || waterfallLeft > 0 || waterfallRight > 0
+    val hasSafeContent = safeContentTop > 0 || safeContentBottom > 0 || safeContentLeft > 0 || safeContentRight > 0
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -46,7 +46,7 @@ fun Sample11Screen() {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Водопад") },
+                title = { Text("Безопасная зона контента") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -64,8 +64,8 @@ fun Sample11Screen() {
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Водопад присутствует") },
-                    trailingContent = { Text(if (hasWaterfall) "ДА" else "НЕТ") },
+                    headlineContent = { Text("Зона присутствует") },
+                    trailingContent = { Text(if (hasSafeContent) "ДА" else "НЕТ") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,40 +73,40 @@ fun Sample11Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { waterfallTop.toDp() }
+                val topDp = with(density) { safeContentTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$waterfallTop px  ($topDp)") },
+                    trailingContent = { Text("$safeContentTop px  ($topDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { waterfallBottom.toDp() }
+                val bottomDp = with(density) { safeContentBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$waterfallBottom px  ($bottomDp)") },
+                    trailingContent = { Text("$safeContentBottom px  ($bottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { waterfallLeft.toDp() }
+                val leftDp = with(density) { safeContentLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$waterfallLeft px  ($leftDp)") },
+                    trailingContent = { Text("$safeContentLeft px  ($leftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { waterfallRight.toDp() }
+                val rightDp = with(density) { safeContentRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$waterfallRight px  ($rightDp)") },
+                    trailingContent = { Text("$safeContentRight px  ($rightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

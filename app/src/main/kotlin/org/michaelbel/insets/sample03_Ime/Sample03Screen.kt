@@ -3,11 +3,11 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample05_MandatorySystemGestures
+package org.michaelbel.insets.sample03_Ime
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.mandatorySystemGestures
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,18 +27,18 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
 
 @Composable
-fun Sample05Screen() {
+fun Sample03Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val mandatorySystemGestures = WindowInsets.mandatorySystemGestures
+    val ime = WindowInsets.ime
 
-    val mandatorySystemGesturesTop = mandatorySystemGestures.getTop(density)
-    val mandatorySystemGesturesBottom = mandatorySystemGestures.getBottom(density)
-    val mandatorySystemGesturesLeft = mandatorySystemGestures.getLeft(density, layoutDirection)
-    val mandatorySystemGesturesRight = mandatorySystemGestures.getRight(density, layoutDirection)
+    val imeTop = ime.getTop(density)
+    val imeBottom = ime.getBottom(density)
+    val imeLeft = ime.getLeft(density, layoutDirection)
+    val imeRight = ime.getRight(density, layoutDirection)
 
-    val hasMandatorySystemGestures = mandatorySystemGesturesTop > 0 || mandatorySystemGesturesBottom > 0 || mandatorySystemGesturesLeft > 0 || mandatorySystemGesturesRight > 0
+    val hasIme = imeTop > 0 || imeBottom > 0 || imeLeft > 0 || imeRight > 0
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -46,7 +46,7 @@ fun Sample05Screen() {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Обяз. жесты системы") },
+                title = { Text("Клавиатура") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -64,8 +64,8 @@ fun Sample05Screen() {
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Жесты присутствуют") },
-                    trailingContent = { Text(if (hasMandatorySystemGestures) "ДА" else "НЕТ") },
+                    headlineContent = { Text("IME присутствует") },
+                    trailingContent = { Text(if (hasIme) "ДА" else "НЕТ") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,40 +73,40 @@ fun Sample05Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { mandatorySystemGesturesTop.toDp() }
+                val topDp = with(density) { imeTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$mandatorySystemGesturesTop px  ($topDp)") },
+                    trailingContent = { Text("$imeTop px  ($topDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { mandatorySystemGesturesBottom.toDp() }
+                val bottomDp = with(density) { imeBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$mandatorySystemGesturesBottom px  ($bottomDp)") },
+                    trailingContent = { Text("$imeBottom px  ($bottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { mandatorySystemGesturesLeft.toDp() }
+                val leftDp = with(density) { imeLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$mandatorySystemGesturesLeft px  ($leftDp)") },
+                    trailingContent = { Text("$imeLeft px  ($leftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { mandatorySystemGesturesRight.toDp() }
+                val rightDp = with(density) { imeRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$mandatorySystemGesturesRight px  ($rightDp)") },
+                    trailingContent = { Text("$imeRight px  ($rightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

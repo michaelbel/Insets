@@ -3,11 +3,11 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample07_StatusBars
+package org.michaelbel.insets.sample05_NavigationBars
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,18 +27,18 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
 
 @Composable
-fun Sample07Screen() {
+fun Sample05Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val statusBars = WindowInsets.statusBars
+    val navigationBars = WindowInsets.navigationBars
 
-    val statusBarsTop = statusBars.getTop(density)
-    val statusBarsBottom = statusBars.getBottom(density)
-    val statusBarsLeft = statusBars.getLeft(density, layoutDirection)
-    val statusBarsRight = statusBars.getRight(density, layoutDirection)
+    val navigationBarsTop = navigationBars.getTop(density)
+    val navigationBarsBottom = navigationBars.getBottom(density)
+    val navigationBarsLeft = navigationBars.getLeft(density, layoutDirection)
+    val navigationBarsRight = navigationBars.getRight(density, layoutDirection)
 
-    val hasStatusBars = statusBarsTop > 0 || statusBarsBottom > 0 || statusBarsLeft > 0 || statusBarsRight > 0
+    val hasNavigationBars = navigationBarsTop > 0 || navigationBarsBottom > 0 || navigationBarsLeft > 0 || navigationBarsRight > 0
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -46,7 +46,7 @@ fun Sample07Screen() {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                title = { Text("Строка состояния") },
+                title = { Text("Панель навигации") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -64,8 +64,8 @@ fun Sample07Screen() {
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Строка присутствует") },
-                    trailingContent = { Text(if (hasStatusBars) "ДА" else "НЕТ") },
+                    headlineContent = { Text("Панель присутствует") },
+                    trailingContent = { Text(if (hasNavigationBars) "ДА" else "НЕТ") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,40 +73,40 @@ fun Sample07Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { statusBarsTop.toDp() }
+                val topDp = with(density) { navigationBarsTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$statusBarsTop px  ($topDp)") },
+                    trailingContent = { Text("$navigationBarsTop px  ($topDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { statusBarsBottom.toDp() }
+                val bottomDp = with(density) { navigationBarsBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$statusBarsBottom px  ($bottomDp)") },
+                    trailingContent = { Text("$navigationBarsBottom px  ($bottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { statusBarsLeft.toDp() }
+                val leftDp = with(density) { navigationBarsLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$statusBarsLeft px  ($leftDp)") },
+                    trailingContent = { Text("$navigationBarsLeft px  ($leftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { statusBarsRight.toDp() }
+                val rightDp = with(density) { navigationBarsRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$statusBarsRight px  ($rightDp)") },
+                    trailingContent = { Text("$navigationBarsRight px  ($rightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
