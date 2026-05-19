@@ -5,23 +5,25 @@
 
 package org.michaelbel.insets.sample01_CaptionBar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.captionBar
+import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
@@ -40,30 +42,23 @@ fun Sample01Screen() {
 
     val hasCaptionBar = captionBarTop > 0 || captionBarBottom > 0 || captionBarLeft > 0 || captionBarRight > 0
 
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = { Text("Строка заголовка") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
-                ),
-                scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = paddingValues,
+            modifier = Modifier
+                .fillMaxSize()
+                .captionBarPadding()
+                .background(MaterialTheme.colorScheme.surface),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Caption Bar присутствует") },
-                    trailingContent = { Text(if (hasCaptionBar) "ДА" else "НЕТ") },
+                    headlineContent = { Text("Has captionBar") },
+                    trailingContent = { Text(if (hasCaptionBar) "TRUE" else "FALSE") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,7 +68,7 @@ fun Sample01Screen() {
             item {
                 val topDp = with(density) { captionBarTop.toDp() }
                 ListItem(
-                    headlineContent = { Text("Сверху") },
+                    headlineContent = { Text("Top") },
                     trailingContent = { Text("$captionBarTop px  ($topDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -83,7 +78,7 @@ fun Sample01Screen() {
             item {
                 val bottomDp = with(density) { captionBarBottom.toDp() }
                 ListItem(
-                    headlineContent = { Text("Снизу") },
+                    headlineContent = { Text("Bottom") },
                     trailingContent = { Text("$captionBarBottom px  ($bottomDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -93,7 +88,7 @@ fun Sample01Screen() {
             item {
                 val leftDp = with(density) { captionBarLeft.toDp() }
                 ListItem(
-                    headlineContent = { Text("Слева") },
+                    headlineContent = { Text("Left") },
                     trailingContent = { Text("$captionBarLeft px  ($leftDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -103,7 +98,7 @@ fun Sample01Screen() {
             item {
                 val rightDp = with(density) { captionBarRight.toDp() }
                 ListItem(
-                    headlineContent = { Text("Справа") },
+                    headlineContent = { Text("Right") },
                     trailingContent = { Text("$captionBarRight px  ($rightDp)") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
