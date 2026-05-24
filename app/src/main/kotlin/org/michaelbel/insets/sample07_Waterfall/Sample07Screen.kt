@@ -3,67 +3,71 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample09_TappableElement
+package org.michaelbel.insets.sample07_Waterfall
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.tappableElement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.waterfall
+import androidx.compose.foundation.layout.waterfallPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
+import org.michaelbel.insets.formatInsetValue
 
 @Composable
-fun Sample09Screen() {
+fun Sample07Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val tappableElement = WindowInsets.tappableElement
+    val waterfall = WindowInsets.waterfall
 
-    val tappableElementTop = tappableElement.getTop(density)
-    val tappableElementBottom = tappableElement.getBottom(density)
-    val tappableElementLeft = tappableElement.getLeft(density, layoutDirection)
-    val tappableElementRight = tappableElement.getRight(density, layoutDirection)
+    val waterfallTop = waterfall.getTop(density)
+    val waterfallBottom = waterfall.getBottom(density)
+    val waterfallLeft = waterfall.getLeft(density, layoutDirection)
+    val waterfallRight = waterfall.getRight(density, layoutDirection)
 
-    val hasTappableElement = tappableElementTop > 0 || tappableElementBottom > 0 || tappableElementLeft > 0 || tappableElementRight > 0
+    val hasWaterfall = waterfallTop > 0 || waterfallBottom > 0 || waterfallLeft > 0 || waterfallRight > 0
 
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = { Text("Тапабельные элементы") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
-                ),
-                scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = paddingValues,
+            modifier = Modifier
+                .fillMaxSize()
+                .waterfallPadding()
+                .background(MaterialTheme.colorScheme.surface),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
+            item {
+                TopAppBar(
+                    title = { Text("WindowInsets.waterfall") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
+                    )
+                )
+            }
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Элементы присутствуют") },
-                    trailingContent = { Text(if (hasTappableElement) "ДА" else "НЕТ") },
+                    headlineContent = { Text("waterfall присутствует") },
+                    trailingContent = { Text(if (hasWaterfall) "TRUE" else "FALSE") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -71,40 +75,40 @@ fun Sample09Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { tappableElementTop.toDp() }
+                val topDp = with(density) { waterfallTop.toDp() }
                 ListItem(
-                    headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$tappableElementTop px  ($topDp)") },
+                    headlineContent = { Text("Top") },
+                    trailingContent = { Text(waterfallTop.formatInsetValue(topDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { tappableElementBottom.toDp() }
+                val bottomDp = with(density) { waterfallBottom.toDp() }
                 ListItem(
-                    headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$tappableElementBottom px  ($bottomDp)") },
+                    headlineContent = { Text("Bottom") },
+                    trailingContent = { Text(waterfallBottom.formatInsetValue(bottomDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { tappableElementLeft.toDp() }
+                val leftDp = with(density) { waterfallLeft.toDp() }
                 ListItem(
-                    headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$tappableElementLeft px  ($leftDp)") },
+                    headlineContent = { Text("Left") },
+                    trailingContent = { Text(waterfallLeft.formatInsetValue(leftDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { tappableElementRight.toDp() }
+                val rightDp = with(density) { waterfallRight.toDp() }
                 ListItem(
-                    headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$tappableElementRight px  ($rightDp)") },
+                    headlineContent = { Text("Right") },
+                    trailingContent = { Text(waterfallRight.formatInsetValue(rightDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

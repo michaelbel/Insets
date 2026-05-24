@@ -3,15 +3,15 @@
     ExperimentalMaterial3ExpressiveApi::class
 )
 
-package org.michaelbel.insets.sample05_NavigationBars
+package org.michaelbel.insets.sample10_TappableElement
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.tappableElement
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -30,18 +30,18 @@ import org.michaelbel.insets.SectionLabel
 import org.michaelbel.insets.formatInsetValue
 
 @Composable
-fun Sample05Screen() {
+fun Sample10Screen() {
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val navigationBars = WindowInsets.navigationBars
+    val tappableElement = WindowInsets.tappableElement
 
-    val navigationBarsTop = navigationBars.getTop(density)
-    val navigationBarsBottom = navigationBars.getBottom(density)
-    val navigationBarsLeft = navigationBars.getLeft(density, layoutDirection)
-    val navigationBarsRight = navigationBars.getRight(density, layoutDirection)
+    val tappableElementTop = tappableElement.getTop(density)
+    val tappableElementBottom = tappableElement.getBottom(density)
+    val tappableElementLeft = tappableElement.getLeft(density, layoutDirection)
+    val tappableElementRight = tappableElement.getRight(density, layoutDirection)
 
-    val hasNavigationBars = navigationBarsTop > 0 || navigationBarsBottom > 0 || navigationBarsLeft > 0 || navigationBarsRight > 0
+    val hasTappableElement = tappableElementTop > 0 || tappableElementBottom > 0 || tappableElementLeft > 0 || tappableElementRight > 0
 
     Box(
         modifier = Modifier
@@ -51,13 +51,13 @@ fun Sample05Screen() {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .navigationBarsPadding()
+                .windowInsetsPadding(tappableElement)
                 .background(MaterialTheme.colorScheme.surface),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item {
                 TopAppBar(
-                    title = { Text("WindowInsets.navigationBars") },
+                    title = { Text("WindowInsets.tappableElement") },
                     colors = TopAppBarDefaults.topAppBarColors(
                         scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
                     )
@@ -66,8 +66,8 @@ fun Sample05Screen() {
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("navigationBars присутствует") },
-                    trailingContent = { Text(if (hasNavigationBars) "TRUE" else "FALSE") },
+                    headlineContent = { Text("tappableElement присутствует") },
+                    trailingContent = { Text(if (hasTappableElement) "TRUE" else "FALSE") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -75,40 +75,40 @@ fun Sample05Screen() {
             }
             item { SectionLabel("Отступы") }
             item {
-                val topDp = with(density) { navigationBarsTop.toDp() }
+                val topDp = with(density) { tappableElementTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Top") },
-                    trailingContent = { Text(navigationBarsTop.formatInsetValue(topDp)) },
+                    trailingContent = { Text(tappableElementTop.formatInsetValue(topDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val bottomDp = with(density) { navigationBarsBottom.toDp() }
+                val bottomDp = with(density) { tappableElementBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Bottom") },
-                    trailingContent = { Text(navigationBarsBottom.formatInsetValue(bottomDp)) },
+                    trailingContent = { Text(tappableElementBottom.formatInsetValue(bottomDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val leftDp = with(density) { navigationBarsLeft.toDp() }
+                val leftDp = with(density) { tappableElementLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Left") },
-                    trailingContent = { Text(navigationBarsLeft.formatInsetValue(leftDp)) },
+                    trailingContent = { Text(tappableElementLeft.formatInsetValue(leftDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                 )
             }
             item {
-                val rightDp = with(density) { navigationBarsRight.toDp() }
+                val rightDp = with(density) { tappableElementRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Right") },
-                    trailingContent = { Text(navigationBarsRight.formatInsetValue(rightDp)) },
+                    trailingContent = { Text(tappableElementRight.formatInsetValue(rightDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

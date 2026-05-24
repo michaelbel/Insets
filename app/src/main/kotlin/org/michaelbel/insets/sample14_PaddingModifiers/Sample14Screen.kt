@@ -36,13 +36,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.text.font.FontFamily
 import org.michaelbel.insets.SectionLabel
+import org.michaelbel.insets.formatInsetValue
 
 @Composable
 fun Sample14Screen() {
     val density = LocalDensity.current
-    val dir = LocalLayoutDirection.current
+    val layoutDirection = LocalLayoutDirection.current
 
     data class ModifierEntry(
         val name: String,
@@ -86,20 +86,20 @@ fun Sample14Screen() {
         ) {
             for (entry in entries) {
                 item {
-                    SectionLabel(entry.name)
+                    SectionLabel("Modifier.${entry.name}")
                 }
                 val top = entry.insets.getTop(density)
                 val bottom = entry.insets.getBottom(density)
-                val left = entry.insets.getLeft(density, dir)
-                val right = entry.insets.getRight(density, dir)
+                val left = entry.insets.getLeft(density, layoutDirection)
+                val right = entry.insets.getRight(density, layoutDirection)
                 val topDp = with(density) { top.toDp() }
                 val bottomDp = with(density) { bottom.toDp() }
                 val leftDp = with(density) { left.toDp() }
                 val rightDp = with(density) { right.toDp() }
                 item {
                     ListItem(
-                        headlineContent = { Text("Сверху", fontFamily = FontFamily.Monospace) },
-                        trailingContent = { Text("$top px  ($topDp)") },
+                        headlineContent = { Text("Top") },
+                        trailingContent = { Text(top.formatInsetValue(topDp)) },
                         colors = ListItemDefaults.colors(
                             containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                         )
@@ -107,8 +107,8 @@ fun Sample14Screen() {
                 }
                 item {
                     ListItem(
-                        headlineContent = { Text("Снизу", fontFamily = FontFamily.Monospace) },
-                        trailingContent = { Text("$bottom px  ($bottomDp)") },
+                        headlineContent = { Text("Bottom") },
+                        trailingContent = { Text(bottom.formatInsetValue(bottomDp)) },
                         colors = ListItemDefaults.colors(
                             containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                         )
@@ -116,8 +116,8 @@ fun Sample14Screen() {
                 }
                 item {
                     ListItem(
-                        headlineContent = { Text("Слева", fontFamily = FontFamily.Monospace) },
-                        trailingContent = { Text("$left px  ($leftDp)") },
+                        headlineContent = { Text("Left") },
+                        trailingContent = { Text(left.formatInsetValue(leftDp)) },
                         colors = ListItemDefaults.colors(
                             containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                         )
@@ -125,8 +125,8 @@ fun Sample14Screen() {
                 }
                 item {
                     ListItem(
-                        headlineContent = { Text("Справа", fontFamily = FontFamily.Monospace) },
-                        trailingContent = { Text("$right px  ($rightDp)") },
+                        headlineContent = { Text("Right") },
+                        trailingContent = { Text(right.formatInsetValue(rightDp)) },
                         colors = ListItemDefaults.colors(
                             containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                         )

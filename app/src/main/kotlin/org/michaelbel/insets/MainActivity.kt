@@ -12,13 +12,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemDefaults
@@ -44,13 +49,22 @@ import org.michaelbel.insets.sample03_Ime.Sample03Screen
 import org.michaelbel.insets.sample04_MandatorySystemGestures.Sample04Screen
 import org.michaelbel.insets.sample05_NavigationBars.Sample05Screen
 import org.michaelbel.insets.sample06_StatusBars.Sample06Screen
-import org.michaelbel.insets.sample07_SystemBars.Sample07Screen
-import org.michaelbel.insets.sample08_SystemGestures.Sample08Screen
-import org.michaelbel.insets.sample09_TappableElement.Sample09Screen
-import org.michaelbel.insets.sample10_Waterfall.Sample10Screen
+import org.michaelbel.insets.sample07_Waterfall.Sample07Screen
+import org.michaelbel.insets.sample08_SystemBars.Sample08Screen
+import org.michaelbel.insets.sample09_SystemGestures.Sample09Screen
+import org.michaelbel.insets.sample10_TappableElement.Sample10Screen
 import org.michaelbel.insets.sample11_SafeDrawing.Sample11Screen
 import org.michaelbel.insets.sample12_SafeGestures.Sample12Screen
 import org.michaelbel.insets.sample13_SafeContent.Sample13Screen
+import org.michaelbel.insets.sample14_PaddingModifiers.Sample14Screen
+import org.michaelbel.insets.sample15_ConsumeInsets.Sample15Screen
+import org.michaelbel.insets.sample16_InsetOperations.Sample16Screen
+import org.michaelbel.insets.sample17_InsetsSides.Sample17Screen
+import org.michaelbel.insets.sample18_IgnoringVisibility.Sample18Screen
+import org.michaelbel.insets.sample19_InsetsVisibility.Sample19Screen
+import org.michaelbel.insets.sample20_ImeAnimation.Sample20Screen
+import org.michaelbel.insets.sample21_SizeModifiers.Sample21Screen
+import org.michaelbel.insets.sample22_ComponentInsets.Sample22Screen
 
 class MainActivity: ComponentActivity() {
 
@@ -79,6 +93,15 @@ class MainActivity: ComponentActivity() {
                             11 -> Sample11Screen()
                             12 -> Sample12Screen()
                             13 -> Sample13Screen()
+                            14 -> Sample14Screen()
+                            15 -> Sample15Screen()
+                            16 -> Sample16Screen()
+                            17 -> Sample17Screen()
+                            18 -> Sample18Screen()
+                            19 -> Sample19Screen()
+                            20 -> Sample20Screen()
+                            21 -> Sample21Screen()
+                            22 -> Sample22Screen()
                         }
                     }
                 }
@@ -86,6 +109,42 @@ class MainActivity: ComponentActivity() {
         }
     }
 }
+
+private data class SampleItem(
+    val number: Int,
+    val title: String
+)
+
+private val windowInsetsSamples = listOf(
+    SampleItem(1, "WindowInsets.captionBar"),
+    SampleItem(2, "WindowInsets.displayCutout"),
+    SampleItem(3, "WindowInsets.ime"),
+    SampleItem(4, "WindowInsets.mandatorySystemGestures"),
+    SampleItem(5, "WindowInsets.navigationBars"),
+    SampleItem(6, "WindowInsets.statusBars"),
+    SampleItem(7, "WindowInsets.waterfall")
+)
+
+private val combinedInsetsSamples = listOf(
+    SampleItem(8, "WindowInsets.systemBars"),
+    SampleItem(9, "WindowInsets.systemGestures"),
+    SampleItem(10, "WindowInsets.tappableElement"),
+    SampleItem(11, "WindowInsets.safeDrawing"),
+    SampleItem(12, "WindowInsets.safeGestures"),
+    SampleItem(13, "WindowInsets.safeContent")
+)
+
+private val otherSamples = listOf(
+    SampleItem(14, "Padding Modifiers"),
+    SampleItem(15, "consumeWindowInsets"),
+    SampleItem(16, "Операции: union / exclude / add"),
+    SampleItem(17, "WindowInsetsSides.only(...)"),
+    SampleItem(18, "IgnoringVisibility"),
+    SampleItem(19, "Состояние видимости (isVisible)"),
+    SampleItem(20, "IME анимация + imeNestedScroll"),
+    SampleItem(21, "Size Modifiers (TopHeight / BottomHeight)"),
+    SampleItem(22, "Компоненты M3 с windowInsets")
+)
 
 @Composable
 private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
@@ -101,149 +160,58 @@ private fun SamplesListScreen(onSampleClick: (Int) -> Unit) {
                 ),
                 scrollBehavior = scrollBehavior
             )
-        },
-        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Horizontal)
+        }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.padding(innerPadding),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                top = 16.dp,
-                end = 16.dp,
-                bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-            ),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = innerPadding + PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(1) },
-                    overlineContent = { Text("Sample 01") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 0, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.captionBar") }
+            itemsIndexed(windowInsetsSamples) { index, sample ->
+                SampleSegmentedListItem(
+                    sample = sample,
+                    index = index,
+                    count = windowInsetsSamples.size,
+                    onSampleClick = onSampleClick
+                )
             }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(2) },
-                    overlineContent = { Text("Sample 02") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 1, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.displayCutout") }
+            item { Spacer(modifier = Modifier.height(12.dp)) }
+            itemsIndexed(combinedInsetsSamples) { index, sample ->
+                SampleSegmentedListItem(
+                    sample = sample,
+                    index = index,
+                    count = combinedInsetsSamples.size,
+                    onSampleClick = onSampleClick
+                )
             }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(3) },
-                    overlineContent = { Text("Sample 03") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 2, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.ime") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(4) },
-                    overlineContent = { Text("Sample 04") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 3, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.mandatorySystemGestures") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(5) },
-                    overlineContent = { Text("Sample 05") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 4, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.navigationBars") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(6) },
-                    overlineContent = { Text("Sample 06") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 5, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.statusBars") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(7) },
-                    overlineContent = { Text("Sample 07") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 6, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.systemBars") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(8) },
-                    overlineContent = { Text("Sample 08") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 7, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.systemGestures") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(9) },
-                    overlineContent = { Text("Sample 09") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 8, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.tappableElement") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(10) },
-                    overlineContent = { Text("Sample 10") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 9, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.waterfall") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(11) },
-                    overlineContent = { Text("Sample 11") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 10, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.safeDrawing") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(12) },
-                    overlineContent = { Text("Sample 12") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 11, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.safeGestures") }
-            }
-            item {
-                SegmentedListItem(
-                    onClick = { onSampleClick(13) },
-                    overlineContent = { Text("Sample 13") },
-                    shapes = ListItemDefaults.segmentedShapes(index = 12, count = 13),
-                    colors = ListItemDefaults.segmentedColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
-                ) { Text("WindowInsets.safeContent") }
+            item { Spacer(modifier = Modifier.height(12.dp)) }
+            itemsIndexed(otherSamples) { index, sample ->
+                SampleSegmentedListItem(
+                    sample = sample,
+                    index = index,
+                    count = otherSamples.size,
+                    onSampleClick = onSampleClick
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun SampleSegmentedListItem(
+    sample: SampleItem,
+    index: Int,
+    count: Int,
+    onSampleClick: (Int) -> Unit
+) {
+    SegmentedListItem(
+        onClick = { onSampleClick(sample.number) },
+        overlineContent = { Text("Sample ${sample.number.toString().padStart(2, '0')}") },
+        shapes = ListItemDefaults.segmentedShapes(index = index, count = count),
+        colors = ListItemDefaults.segmentedColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+        )
+    ) {
+        Text(sample.title)
     }
 }

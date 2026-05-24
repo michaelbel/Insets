@@ -5,26 +5,29 @@
 
 package org.michaelbel.insets.sample04_MandatorySystemGestures
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.mandatorySystemGestures
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.mandatorySystemGestures
+import androidx.compose.foundation.layout.mandatorySystemGesturesPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
+import org.michaelbel.insets.formatInsetValue
 
 @Composable
 fun Sample04Screen() {
@@ -40,30 +43,31 @@ fun Sample04Screen() {
 
     val hasMandatorySystemGestures = mandatorySystemGesturesTop > 0 || mandatorySystemGesturesBottom > 0 || mandatorySystemGesturesLeft > 0 || mandatorySystemGesturesRight > 0
 
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = { Text("Обяз. жесты системы") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
-                ),
-                scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = paddingValues,
+            modifier = Modifier
+                .fillMaxSize()
+                .mandatorySystemGesturesPadding()
+                .background(MaterialTheme.colorScheme.surface),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
+            item {
+                TopAppBar(
+                    title = { Text("WindowInsets.mandatorySystemGestures") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
+                    )
+                )
+            }
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Жесты присутствуют") },
-                    trailingContent = { Text(if (hasMandatorySystemGestures) "ДА" else "НЕТ") },
+                    headlineContent = { Text("mandatorySystemGestures присутствует") },
+                    trailingContent = { Text(if (hasMandatorySystemGestures) "TRUE" else "FALSE") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,8 +77,8 @@ fun Sample04Screen() {
             item {
                 val topDp = with(density) { mandatorySystemGesturesTop.toDp() }
                 ListItem(
-                    headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$mandatorySystemGesturesTop px  ($topDp)") },
+                    headlineContent = { Text("Top") },
+                    trailingContent = { Text(mandatorySystemGesturesTop.formatInsetValue(topDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -83,8 +87,8 @@ fun Sample04Screen() {
             item {
                 val bottomDp = with(density) { mandatorySystemGesturesBottom.toDp() }
                 ListItem(
-                    headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$mandatorySystemGesturesBottom px  ($bottomDp)") },
+                    headlineContent = { Text("Bottom") },
+                    trailingContent = { Text(mandatorySystemGesturesBottom.formatInsetValue(bottomDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -93,8 +97,8 @@ fun Sample04Screen() {
             item {
                 val leftDp = with(density) { mandatorySystemGesturesLeft.toDp() }
                 ListItem(
-                    headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$mandatorySystemGesturesLeft px  ($leftDp)") },
+                    headlineContent = { Text("Left") },
+                    trailingContent = { Text(mandatorySystemGesturesLeft.formatInsetValue(leftDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -103,8 +107,8 @@ fun Sample04Screen() {
             item {
                 val rightDp = with(density) { mandatorySystemGesturesRight.toDp() }
                 ListItem(
-                    headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$mandatorySystemGesturesRight px  ($rightDp)") },
+                    headlineContent = { Text("Right") },
+                    trailingContent = { Text(mandatorySystemGesturesRight.formatInsetValue(rightDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

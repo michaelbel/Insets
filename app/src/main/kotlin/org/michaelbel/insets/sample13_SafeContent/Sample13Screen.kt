@@ -5,26 +5,29 @@
 
 package org.michaelbel.insets.sample13_SafeContent
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import org.michaelbel.insets.SectionLabel
+import org.michaelbel.insets.formatInsetValue
 
 @Composable
 fun Sample13Screen() {
@@ -40,30 +43,31 @@ fun Sample13Screen() {
 
     val hasSafeContent = safeContentTop > 0 || safeContentBottom > 0 || safeContentLeft > 0 || safeContentRight > 0
 
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = { Text("Безопасная зона контента") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
-                ),
-                scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = paddingValues,
+            modifier = Modifier
+                .fillMaxSize()
+                .safeContentPadding()
+                .background(MaterialTheme.colorScheme.surface),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
+            item {
+                TopAppBar(
+                    title = { Text("WindowInsets.safeContent") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
+                    )
+                )
+            }
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Зона присутствует") },
-                    trailingContent = { Text(if (hasSafeContent) "ДА" else "НЕТ") },
+                    headlineContent = { Text("safeContent присутствует") },
+                    trailingContent = { Text(if (hasSafeContent) "TRUE" else "FALSE") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -73,8 +77,8 @@ fun Sample13Screen() {
             item {
                 val topDp = with(density) { safeContentTop.toDp() }
                 ListItem(
-                    headlineContent = { Text("Сверху") },
-                    trailingContent = { Text("$safeContentTop px  ($topDp)") },
+                    headlineContent = { Text("Top") },
+                    trailingContent = { Text(safeContentTop.formatInsetValue(topDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -83,8 +87,8 @@ fun Sample13Screen() {
             item {
                 val bottomDp = with(density) { safeContentBottom.toDp() }
                 ListItem(
-                    headlineContent = { Text("Снизу") },
-                    trailingContent = { Text("$safeContentBottom px  ($bottomDp)") },
+                    headlineContent = { Text("Bottom") },
+                    trailingContent = { Text(safeContentBottom.formatInsetValue(bottomDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -93,8 +97,8 @@ fun Sample13Screen() {
             item {
                 val leftDp = with(density) { safeContentLeft.toDp() }
                 ListItem(
-                    headlineContent = { Text("Слева") },
-                    trailingContent = { Text("$safeContentLeft px  ($leftDp)") },
+                    headlineContent = { Text("Left") },
+                    trailingContent = { Text(safeContentLeft.formatInsetValue(leftDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -103,8 +107,8 @@ fun Sample13Screen() {
             item {
                 val rightDp = with(density) { safeContentRight.toDp() }
                 ListItem(
-                    headlineContent = { Text("Справа") },
-                    trailingContent = { Text("$safeContentRight px  ($rightDp)") },
+                    headlineContent = { Text("Right") },
+                    trailingContent = { Text(safeContentRight.formatInsetValue(rightDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )

@@ -10,7 +10,9 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.expressiveLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 
 @Composable
 fun AppTheme(
@@ -32,4 +34,13 @@ fun SectionLabel(text: String) {
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 4.dp)
     )
+}
+
+fun Int.formatInsetValue(dp: Dp): String {
+    return "${this}.px (${dp.formatDp()})"
+}
+
+fun Dp.formatDp(): String {
+    val rounded = value.roundToInt()
+    return if (value == rounded.toFloat()) "${rounded}.dp" else "${value}.dp"
 }

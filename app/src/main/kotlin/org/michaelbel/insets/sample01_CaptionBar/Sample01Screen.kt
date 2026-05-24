@@ -9,11 +9,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.captionBar
 import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -21,12 +19,17 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.Dp
 import org.michaelbel.insets.SectionLabel
+import org.michaelbel.insets.formatInsetValue
+import kotlin.math.roundToInt
 
 @Composable
 fun Sample01Screen() {
@@ -54,10 +57,18 @@ fun Sample01Screen() {
                 .background(MaterialTheme.colorScheme.surface),
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
+            item {
+                TopAppBar(
+                    title = { Text("WindowInsets.captionBar") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
+                    )
+                )
+            }
             item { SectionLabel("Обнаружение") }
             item {
                 ListItem(
-                    headlineContent = { Text("Has captionBar") },
+                    headlineContent = { Text("captionBar присутствует") },
                     trailingContent = { Text(if (hasCaptionBar) "TRUE" else "FALSE") },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -69,7 +80,7 @@ fun Sample01Screen() {
                 val topDp = with(density) { captionBarTop.toDp() }
                 ListItem(
                     headlineContent = { Text("Top") },
-                    trailingContent = { Text("$captionBarTop px  ($topDp)") },
+                    trailingContent = { Text(captionBarTop.formatInsetValue(topDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -79,7 +90,7 @@ fun Sample01Screen() {
                 val bottomDp = with(density) { captionBarBottom.toDp() }
                 ListItem(
                     headlineContent = { Text("Bottom") },
-                    trailingContent = { Text("$captionBarBottom px  ($bottomDp)") },
+                    trailingContent = { Text(captionBarBottom.formatInsetValue(bottomDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -89,7 +100,7 @@ fun Sample01Screen() {
                 val leftDp = with(density) { captionBarLeft.toDp() }
                 ListItem(
                     headlineContent = { Text("Left") },
-                    trailingContent = { Text("$captionBarLeft px  ($leftDp)") },
+                    trailingContent = { Text(captionBarLeft.formatInsetValue(leftDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
@@ -99,7 +110,7 @@ fun Sample01Screen() {
                 val rightDp = with(density) { captionBarRight.toDp() }
                 ListItem(
                     headlineContent = { Text("Right") },
-                    trailingContent = { Text("$captionBarRight px  ($rightDp)") },
+                    trailingContent = { Text(captionBarRight.formatInsetValue(rightDp)) },
                     colors = ListItemDefaults.colors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
                     )
