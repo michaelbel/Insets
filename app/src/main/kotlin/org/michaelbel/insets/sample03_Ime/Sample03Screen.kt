@@ -15,9 +15,6 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Keyboard
-import androidx.compose.material.icons.filled.KeyboardHide
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -44,6 +41,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import org.michaelbel.insets.Keyboard
+import org.michaelbel.insets.KeyboardHide
 import org.michaelbel.insets.SectionLabel
 import org.michaelbel.insets.formatInsetValue
 
@@ -93,7 +92,7 @@ fun Sample03Screen() {
                             }
                         ) {
                             Icon(
-                                imageVector = if (hasIme) Icons.Filled.KeyboardHide else Icons.Filled.Keyboard,
+                                imageVector = if (hasIme) KeyboardHide else Keyboard,
                                 contentDescription = if (hasIme) "Скрыть клавиатуру" else "Показать клавиатуру"
                             )
                         }

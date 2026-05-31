@@ -53,7 +53,6 @@ base {
 dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
-    implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.foundation)
     implementation(libs.androidx.activity.compose)
     implementation(libs.google.material)
