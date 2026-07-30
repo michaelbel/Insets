@@ -1,8 +1,3 @@
-@file:OptIn(
-    ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3ExpressiveApi::class
-)
-
 package org.michaelbel.insets.sample01_CaptionBar
 
 import androidx.compose.foundation.background
@@ -13,8 +8,6 @@ import androidx.compose.foundation.layout.captionBar
 import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
@@ -26,10 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.Dp
 import org.michaelbel.insets.SectionLabel
 import org.michaelbel.insets.formatInsetValue
-import kotlin.math.roundToInt
 
 @Composable
 fun Sample01Screen() {
