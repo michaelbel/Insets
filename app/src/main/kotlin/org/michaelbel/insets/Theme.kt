@@ -144,6 +144,7 @@ val Keyboard: ImageVector
         }.build()
         return _keyboard!!
     }
+private var _keyboard: ImageVector? = null
 
 val KeyboardHide: ImageVector
     get() {
@@ -245,6 +246,4 @@ val KeyboardHide: ImageVector
         }.build()
         return _keyboardHide!!
     }
-
-private var _keyboard: ImageVector? = null
 private var _keyboardHide: ImageVector? = null
